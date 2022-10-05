@@ -16,7 +16,7 @@ public class OnewayProducer {
 
     public static void main(String[] args) throws Exception {
         // 实例化消息生产者Producer
-        DefaultMQProducer producer = new DefaultMQProducer(CONSUMER_GROUP1);
+        DefaultMQProducer producer = new DefaultMQProducer(CONSUMER_GROUP1, RocketUtils.getAclRPCHook());
         // 设置NameServer的地址
         producer.setNamesrvAddr(RocketUtils.NAMESRVADDR);
         // 启动Producer实例

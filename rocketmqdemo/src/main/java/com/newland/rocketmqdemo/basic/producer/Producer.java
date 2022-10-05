@@ -19,7 +19,7 @@ public class Producer {
     private static final String CONSUMER_GROUP1="please_rename_unique_group_name";
     private static final String TopicTest="TopicTest";
     public static void main(String[] args) throws Exception {
-        DefaultMQProducer producer = new DefaultMQProducer(CONSUMER_GROUP1);
+        DefaultMQProducer producer = new DefaultMQProducer(CONSUMER_GROUP1, RocketUtils.getAclRPCHook());
 
         producer.setNamesrvAddr(RocketUtils.NAMESRVADDR);
 

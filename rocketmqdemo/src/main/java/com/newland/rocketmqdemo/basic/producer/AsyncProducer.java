@@ -1,6 +1,7 @@
 package com.newland.rocketmqdemo.basic.producer;
 
 import com.newland.rocketmqdemo.utils.RocketUtils;
+import org.apache.rocketmq.client.AccessChannel;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
 import org.apache.rocketmq.client.producer.SendCallback;
 import org.apache.rocketmq.client.producer.SendResult;
@@ -20,9 +21,10 @@ public class AsyncProducer {
     private static final String TopicTest="TopicTest";
     public static void main(String[] args) throws Exception {
         // 实例化消息生产者Producer
-        DefaultMQProducer producer = new DefaultMQProducer(CONSUMER_GROUP1);
+        DefaultMQProducer producer = new DefaultMQProducer(CONSUMER_GROUP1,RocketUtils.getAclRPCHook());
         // 设置NameServer的地址
         producer.setNamesrvAddr(RocketUtils.NAMESRVADDR);
+        producer.setAccessChannel(AccessChannel.LOCAL);
         // 启动Producer实例
         producer.start();
         producer.setRetryTimesWhenSendAsyncFailed(0);

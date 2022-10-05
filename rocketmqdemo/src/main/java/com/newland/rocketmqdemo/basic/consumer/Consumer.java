@@ -5,6 +5,7 @@ import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
 import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
+import org.apache.rocketmq.client.consumer.rebalance.AllocateMessageQueueAveragely;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.common.message.MessageExt;
 
@@ -20,7 +21,7 @@ public class Consumer {
     public static void main(String[] args) throws InterruptedException, MQClientException {
 
         // 实例化消费者
-        DefaultMQPushConsumer consumer = new DefaultMQPushConsumer(CONSUMER_GROUP1);
+        DefaultMQPushConsumer consumer = new DefaultMQPushConsumer(CONSUMER_GROUP1,RocketUtils.getAclRPCHook(),new AllocateMessageQueueAveragely());
 
         // 设置NameServer的地址
         consumer.setNamesrvAddr(RocketUtils.NAMESRVADDR);

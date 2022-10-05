@@ -1,9 +1,11 @@
 package com.newland.rocketmqdemo.basic.consumer;
 
+import com.newland.rocketmqdemo.utils.RocketUtils;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
 import org.apache.rocketmq.client.consumer.listener.ConsumeOrderlyContext;
 import org.apache.rocketmq.client.consumer.listener.ConsumeOrderlyStatus;
 import org.apache.rocketmq.client.consumer.listener.MessageListenerOrderly;
+import org.apache.rocketmq.client.consumer.rebalance.AllocateMessageQueueAveragely;
 import org.apache.rocketmq.common.consumer.ConsumeFromWhere;
 import org.apache.rocketmq.common.message.MessageExt;
 
@@ -21,7 +23,7 @@ public class ConsumerInOrder {
     private static final String TopicTest = "TopicTest";
 
     public static void main(String[] args) throws Exception {
-        DefaultMQPushConsumer consumer = new DefaultMQPushConsumer(CONSUMER_GROUP1);
+        DefaultMQPushConsumer consumer = new DefaultMQPushConsumer(CONSUMER_GROUP1, RocketUtils.getAclRPCHook(),new AllocateMessageQueueAveragely());
         consumer.setNamesrvAddr(NAMESRVADDR);
         /**
          * 设置Consumer第一次启动是从队列头部开始消费还是队列尾部开始消费<br>
