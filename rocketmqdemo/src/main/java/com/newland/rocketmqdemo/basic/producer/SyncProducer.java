@@ -12,8 +12,9 @@ import org.apache.rocketmq.remoting.common.RemotingHelper;
  * Date: 2022/8/20 11:26:19
  */
 public class SyncProducer {
-    private static final String CONSUMER_GROUP1="please_rename_unique_group_name";
-    private static final String TopicTest="TopicTest";
+    private static final String CONSUMER_GROUP1 = "please_rename_unique_group_name";
+    private static final String TopicTest = "TopicTest";
+
     public static void main(String[] args) throws Exception {
         // 实例化消息生产者Producer
         DefaultMQProducer producer = new DefaultMQProducer(CONSUMER_GROUP1, RocketUtils.getAclRPCHook());
@@ -23,8 +24,7 @@ public class SyncProducer {
         producer.start();
         for (int i = 0; i < 100; i++) {
             // 创建消息，并指定Topic，Tag和消息体
-            Message msg = new Message(TopicTest,
-                    "TagA" /* Tag */,
+            Message msg = new Message(TopicTest, "TagA",
                     ("Hello RocketMQ " + i).getBytes(RemotingHelper.DEFAULT_CHARSET) /* Message body */
             );
             // 发送消息到一个Broker
